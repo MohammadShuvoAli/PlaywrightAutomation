@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test')
 
-test('Homepage', async({page})=> {
+test('First Test', async({page})=> {
     await page.goto("https://www.demoblaze.com/index.html")
     
     const pageTitle = await page.title()
