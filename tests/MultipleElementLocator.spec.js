@@ -1,10 +1,12 @@
-const {test, expect} = require('@playwright/test')
+const {test} = require('@playwright/test')
 
 test('Locate Multiple Elements', async({page}) => {
     await page.goto("https://www.demoblaze.com/index.html")
 
+    await page.waitForSelector("a")
+
     const links = await page.$$('a')
-    
+
     for(const link of links){
         const linkText = await link.textContent()
         console.log(linkText);
