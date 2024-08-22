@@ -14,11 +14,11 @@ test("Locators", async({page})=>{
     await page.locator('//*[@id="loginpassword"]').fill('shuvo123')
     await page.fill('//*[@id="loginpassword"]', 'shuvo123')
 
-    // click on login button - property
-    await page.click('type=button') // locator type 2
+    // click on login button - xpath
+    await page.click('//*[@id="logInModal"]/div/div/div[3]/button[2]') // locator type 2
 
     // verify logout link presence - xpath
-    const logoutLink = await page.locator("//a[@id='logout2']")
+    const logoutLink = page.locator("//a[@id='logout2']")
     await expect(logoutLink).toBeVisible()
 
     await page.close()
