@@ -1,5 +1,4 @@
 /*
-page.getByText() to locate by text content.
 page.getByLabel() to locate a form control by associated label's text.
 page.getByTitle() to locate an element by its title attribute.
 page.getByTestId() to locate an element based on its data-testid attribute (other attributes can be configured).
@@ -20,6 +19,9 @@ test("Built-in Locators", async({page})=>{
 
     //page.getByRole() to locate by explicit and implicit accessibility attributes.
     await page.getByRole('button', {type:'submit'}).click()
+
+    //page.getByText() to locate by text content.
+    await expect(page.getByText('PIM')).toBeVisible()
 
     await page.close()
 })
