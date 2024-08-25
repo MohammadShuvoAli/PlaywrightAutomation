@@ -18,6 +18,7 @@ test('Assertions', async({page})=>{
     //expect(locator).toBeChecked() - Radio button is checked
     await page.locator('#gender-male').click()
     await expect(page.locator('#gender-male')).toBeChecked()
+    await expect(page.locator('#gender-female')).not.toBeChecked()
 
     //expect(locator).toBeChecked() - Checkbox is checked
     await expect(page.locator('#Newsletter')).toBeChecked()
@@ -27,11 +28,18 @@ test('Assertions', async({page})=>{
     await expect(registerButton).toHaveAttribute('type', 'submit')
 
     //expect(locator).toHaveText() - Element matches text
-    await expect(page.locator('.page-title h1')).toHaveText('Register')
+    await expect(page.locator('.page-title h1')).toHaveText('Register') // full text
     
     //expect(locator).toContainText() -	Element contains text
-    await expect(page.locator('.page-title h1')).toContainText('Reg')
+    await expect(page.locator('.page-title h1')).toContainText('Reg') // partial text
 
+    //expect(locator).toHaveValue(value) - Input has a value
+    await page.locator('#Email').fill('shuvo@gmail.com')
+    await expect(page.locator('#Email')).toHaveValue('shuvo@gmail.com')
 
+    //expect(locator).toHaveCount() - List of elements has given length
+    const months = await page.locator("select[name='DateOfBirthMonth'] option")
+    await expect(months).toHaveCount(13)
+    
     page.close()
 })
