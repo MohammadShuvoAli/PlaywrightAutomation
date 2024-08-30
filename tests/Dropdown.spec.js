@@ -31,3 +31,28 @@ test("Check number of options in dropdown", async({page})=>{
 
     await page.close()
 })
+
+test("Check presence of value in dropdown", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    // Check presence of value in dropdown - Method 1
+    const dropdownContent = await page.locator("#country").textContent()
+    await expect(dropdownContent.includes('Canada')).toBeTruthy()
+
+    // Check presence of value in dropdown - Method 1 - using loop
+    const options = await page.$$('#country option')
+    let status = false
+
+    for(const option of options){
+        console.log(await option.textContent())
+        let value = await option.textContent()
+        if(value.includes('China')){
+            status = true
+            break
+        }
+    }
+
+    await expect(status).toBeTruthy()
+
+    await page.close()
+})
