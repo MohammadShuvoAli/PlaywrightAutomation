@@ -3,7 +3,7 @@ const {test, expect} = require('@playwright/test')
 test("Handle Auto Suggest Dropdown", async({page})=>{
     await page.goto("https://www.shohoz.com")
     await page.locator("#fromcity").click()
-    await page.locator("#fromcity").type('Dha', {delay:2000})
+    await page.locator("#fromcity").type('Dha', {delay:200})
     
     await page.waitForSelector(".station-filter-dropdown>button")
 
