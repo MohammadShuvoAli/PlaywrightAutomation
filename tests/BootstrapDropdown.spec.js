@@ -6,13 +6,33 @@ test("Handle Bootstrap Dropdown", async({page})=>{
     await page.locator(".multiselect").click()
     
     // checking number of options present in dropdown
-    const option = await page.locator("ul>li label input")
-    await expect(option).toHaveCount(11)
+    const allOption = await page.locator("ul>li label input")
+    await expect(allOption).toHaveCount(11)
 
     // checking number of options present in dropdown using JS array
-    const options = await page.$$("ul>li label input")
-    console.log("Number of options in dropdown: ", options.length)
-    await expect(options.length).toBe(11)
+    const optionDropdown = await page.$$("ul>li label input")
+    console.log("Number of options in dropdown: ", optionDropdown.length)
+    await expect(optionDropdown.length).toBe(11)
+
+    // select options from dropdown
+    const options = await page.$$("ul>li label")
+
+    for(let option of options){
+        const value = await option.textContent()
+        console.log(value)
+        if(value.includes('Java') || value.includes('MySQL') || value.includes('C#')){
+            await option.click()
+        }
+    }
+
+    // deselct options from dropdown
+    for(let option of options){
+        const value = await option.textContent()
+        console.log(value)
+        if(value.includes('HTML') || value.includes('CSS')){
+            await option.click()
+        }
+    }
 
     await page.waitForTimeout(5000)
     await page.close()
