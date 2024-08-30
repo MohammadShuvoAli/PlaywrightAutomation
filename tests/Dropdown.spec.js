@@ -56,3 +56,20 @@ test("Check presence of value in dropdown", async({page})=>{
 
     await page.close()
 })
+
+test("Select option from dropdown using loop", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    const options = await page.$$('#country option')
+
+    for(const option of options){
+        console.log(await option.textContent())
+        let value = await option.textContent()
+        if(value.includes('China')){
+            await page.selectOption("#country", value)
+            break
+        }
+    }
+
+    await page.close()
+})
