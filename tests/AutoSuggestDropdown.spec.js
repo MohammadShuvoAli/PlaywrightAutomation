@@ -13,6 +13,10 @@ test("Handle Auto Suggest Dropdown", async({page})=>{
         if(await option.isVisible()){
             const value = await option.textContent()
             console.log(value)
+            if(value.includes('Dhamrai')){
+                await option.click()
+                break
+            }
         }
     }
     
