@@ -13,6 +13,8 @@ test("Handle Frames using name or URL", async({page})=>{
     // locating frame using URL
     const frame_1 = await page.frame({url:'https://ui.vision/demo/webtest/frames/frame_1.html'})
     await frame_1.fill("input[name='mytext1']", 'Hello, Shuvo!')
+    // without using any variable
+    // await page.frame({url:'https://ui.vision/demo/webtest/frames/frame_1.html'}).fill("input[name='mytext1']", 'Hello, Shuvo!')
     
     await page.waitForTimeout(3000)
     await page.close()
