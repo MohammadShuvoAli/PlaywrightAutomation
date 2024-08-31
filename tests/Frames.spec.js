@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test')
 
-test("Alert with OK", async({page})=>{
+test("Handle Frames", async({page})=>{
     await page.goto("")
 
     
