@@ -80,6 +80,35 @@ test("print all table data using loop", async({page})=>{
     await page.close()
 })
 
+test("print all data from the table with pagination", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    const table = await page.locator("#productTable")
+    const columns = await table.locator("thead > tr > th")
+    const rows = await table.locator("tbody > tr")
+
+    const pages = await page.locator('#pagination li a')
+    console.log('Number of pages in the table:', await pages.count())
+
+    for(let p=0; p < await pages.count(); p++){
+        if(p>0){
+            await pages.nth(p).click()
+        }
+
+        for(let i=0; i < await rows.count(); i++){
+            const currentRow = rows.nth(i)
+            const tableRowData = currentRow.locator('td')
+            for(let j=0; j < await tableRowData.count()-1; j++){
+                console.log(await tableRowData.nth(j).textContent())
+            }
+        }
+        await page.waitForTimeout(3000)
+    }
+
+    await page.waitForTimeout(3000)
+    await page.close()
+})
+
 async function selectProduct(rows, page, name){
     const matchedRow = await rows.filter({
         has: page.locator('td'),
