@@ -17,3 +17,21 @@ test("count number of rows and columns in table", async({page})=>{
     await page.waitForTimeout(3000)
     await page.close()
 })
+
+test("select specific checkbox from table cell", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    const table = await page.locator("#productTable")
+    const columns = await table.locator("thead > tr > th")
+    const rows = await table.locator("tbody > tr")
+
+    const matchedRow = await rows.filter({
+        has: page.locator('td'),
+        hasText: 'Product 4'
+    })
+
+    matchedRow.locator('input').check()
+    
+    await page.waitForTimeout(3000)
+    await page.close()
+})
