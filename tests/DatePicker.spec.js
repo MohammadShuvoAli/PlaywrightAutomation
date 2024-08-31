@@ -9,7 +9,7 @@ test("select date by filling the input field", async({page})=>{
     await page.close()
 })
 
-test("select date from calendar popup", async({page})=>{
+test("select date from calendar popup using loop", async({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com")
 
     // date information
