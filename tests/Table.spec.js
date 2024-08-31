@@ -49,7 +49,35 @@ test("select multiple checkbox from table cell using function", async({page})=>{
     await selectProduct(rows, page, 'Product 5')
     
     await page.waitForTimeout(3000)
-    //await page.close()
+    await page.close()
+})
+
+test("print all table data using loop", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    const table = await page.locator("table[name='BookTable']")
+
+    // total number of rows and columns in table
+    const columns = await table.locator("tbody > tr > th")
+    console.log("Number of columns: ", await columns.count())
+    await expect(await columns.count()).toBe(4)
+
+    const rows = await table.locator("tbody > tr")
+    console.log("Number of rows: ", await rows.count())
+    await expect(await rows.count()).toBe(7)
+
+    for(let i=0; i < await rows.count(); i++){
+
+        const currentRow = rows.nth(i)
+        const tableRowData = currentRow.locator('td')
+
+        for(let j=0; j < await tableRowData.count()-1; j++){
+            console.log(await tableRowData.nth(j).textContent())
+        }
+    }
+    
+    await page.waitForTimeout(3000)
+    await page.close()
 })
 
 async function selectProduct(rows, page, name){
