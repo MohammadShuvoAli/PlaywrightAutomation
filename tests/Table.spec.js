@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test')
 
-test("Handle Table", async({page})=>{
+test("count number of rows and columns in table", async({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com")
 
     const table = await page.locator("#productTable")
