@@ -9,7 +9,7 @@ test("select date by filling the input field", async({page})=>{
     await page.close()
 })
 
-test.only("select date from calendar popup", async({page})=>{
+test("select date from calendar popup", async({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com")
 
     // date information
@@ -29,6 +29,15 @@ test.only("select date from calendar popup", async({page})=>{
         }
 
         await page.locator('[title="Next"]').click() // Next button
+    }
+
+    const dates = await page.$$(".ui-datepicker-calendar > tbody > tr > td > a")
+
+    for(const currentDate of dates){
+        if(await currentDate.textContent() == date){
+            await currentDate.click()
+            break
+        }
     }
     
     await page.waitForTimeout(5000)
