@@ -19,3 +19,21 @@ test("Handle Frames using name or URL", async({page})=>{
     await page.waitForTimeout(3000)
     await page.close()
 })
+
+test("Handle Frames using frame locator", async({page})=>{
+    await page.goto("https://ui.vision/demo/webtest/frames/")
+
+    // count total number of frames
+    const allFrames = await page.frames()
+    console.log("Number of frames:", allFrames.length)
+
+    // locating frame using frame locator
+    const inputbox = await page.frameLocator("frame[src='frame_1.html']").locator("input[name='mytext1']")
+    await inputbox.fill('Hi! Shuvo')
+
+    // without using any variable
+    // await page.frameLocator("frame[src='frame_1.html']").locator("input[name='mytext1']").fill('Hi! Shuvo')
+
+    await page.waitForTimeout(3000)
+    await page.close()
+})
