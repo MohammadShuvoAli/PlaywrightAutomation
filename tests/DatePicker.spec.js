@@ -43,3 +43,31 @@ test("select date from calendar popup using loop", async({page})=>{
     await page.waitForTimeout(5000)
     await page.close()
 })
+
+test("select date from calendar popup without loop", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    // date information
+    const year = "2026"
+    const month = "September"
+    const date = "15"
+
+    // click on field for calendar pop up
+    await page.locator("#datepicker").click()
+
+    while(true){
+        const currentMonth = await page.locator('.ui-datepicker-month').textContent()
+        const currentYear = await page.locator('.ui-datepicker-year').textContent()
+
+        if(currentYear == year && currentMonth == month){
+            break
+        }
+
+        await page.locator('[title="Next"]').click() // Next button
+    }
+
+    await page.click(`//a[@class='ui-state-default'][text()='${date}']`)
+    
+    await page.waitForTimeout(5000)
+    await page.close()
+})
