@@ -17,3 +17,22 @@ test("Upload Single File", async({page})=>{
     await page.waitForTimeout(3000)
     await page.close()
 })
+
+test.only("Upload Multiple File", async({page})=>{
+    await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php")
+    
+    // wait for the selector
+    await page.waitForSelector("#filesToUpload")
+    // select multiple file for upload
+    await page.locator("#filesToUpload").setInputFiles(['files/test1.pdf', 'files/test2.pdf'])
+    
+    // verify file upload
+    await expect(page.locator("#main > div > p:nth-child(6) > strong")).toHaveText("Files You Selected:")
+    
+    // verify file names
+    await expect(page.locator("ul#fileList>li:nth-child(1)")).toHaveText("test1.pdf")
+    await expect(page.locator("ul#fileList>li:nth-child(2)")).toHaveText("test2.pdf")
+
+    await page.waitForTimeout(3000)
+    await page.close()
+})
