@@ -16,8 +16,8 @@ test("Keyboard Actions", async({page})=>{
     await page.keyboard.press('Control+C')
 
     // Press Tab button twice
-    await page.keyboard.press('Tab')
-    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab') // open file button
+    await page.keyboard.press('Tab') // 2nd input field
 
     // Ctrl + V - Paste Text
     await page.keyboard.press('Control+V')
