@@ -23,3 +23,18 @@ test("Mouse Right Click", async({page})=>{
     await page.waitForTimeout(3000)
     await page.close()
 })
+
+test("Mouse Double Click", async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com")
+
+    await page.locator("#field1").clear()
+    await page.locator("#field1").fill("Hi Shuvo!!!")
+
+    // double click - dblclick()
+    await page.locator("//button[normalize-space()='Copy Text']").dblclick()
+
+    await expect(page.locator("#field2")).toHaveValue("Hi Shuvo!!!")
+
+    await page.waitForTimeout(3000)
+    await page.close()
+})
