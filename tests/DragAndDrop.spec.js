@@ -17,3 +17,16 @@ test("Drag and Drop using Mouse Actions", async({page})=>{
     await page.waitForTimeout(3000)
     await page.close()
 })
+
+test("Drag and Drop using Built-in Method", async({page})=>{
+    await page.goto("http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html")
+
+    const sourceSeoul = await page.locator("#box5")
+    const destinationSouthKorea = await page.locator("#box105")
+
+    // built-in method
+    await sourceSeoul.dragTo(destinationSouthKorea)
+
+    await page.waitForTimeout(3000)
+    await page.close()
+})
