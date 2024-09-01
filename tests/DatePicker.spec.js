@@ -64,6 +64,7 @@ test("select date from calendar popup without loop", async({page})=>{
         }
 
         await page.locator('[title="Next"]').click() // Next button
+        // await page.locator('[title="Prev"]').click() // Previous button
     }
 
     await page.click(`//a[@class='ui-state-default'][text()='${date}']`)
