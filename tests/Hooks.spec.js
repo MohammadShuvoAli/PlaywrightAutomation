@@ -1,5 +1,4 @@
 const {test, expect} = require('@playwright/test')
-const { browser } = require('har-validator')
 
 let page;
 
@@ -18,20 +17,17 @@ test.beforeEach(async ({browser})=>{
 
 test.afterEach(async ()=>{
     // Logout
-    await page.locator('#logout2').click()
+    await page.locator("//a[@id='logout2']").click()
 })
 
-test("Homepage Test", async({page})=>{
+test("Homepage Test", async()=>{
     // Count total products from homepage    
     await page.waitForSelector('.hrefch')
     const products = await page.$$('.hrefch')
     expect(products).toHaveLength(9)
-
-    await page.waitForTimeout(3000)
-    await page.close()
 })
 
-test("Add product to cart", async({page})=>{
+test("Add product to cart", async()=>{
     // Select a product
     await page.locator(".hrefch[href='prod.html?idp_=1']").click()
 
@@ -42,7 +38,4 @@ test("Add product to cart", async({page})=>{
         expect(dialog.message()).toContain('Product added.')
         dialog.accept()
     })
-
-    await page.waitForTimeout(3000)
-    await page.close()
 })
