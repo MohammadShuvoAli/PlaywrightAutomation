@@ -23,7 +23,7 @@ test('Full Page Screenshot', async()=>{
     await page.screenshot({path: 'tests/Screenshot/' + Date.now() + ' FullPage.png', fullPage:true}) 
 })
 
-test('Page Element Screenshot', async()=>{
+test.only('Page Element Screenshot', async()=>{
     // old screenshot will be replaced with new
     await page.locator("//div[5]/div[3]").screenshot({path: 'tests/Screenshot/' + 'ElementScreenshot.png'}) 
     
