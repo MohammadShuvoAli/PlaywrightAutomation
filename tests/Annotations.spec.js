@@ -1,3 +1,11 @@
+/*
+test.skip(): Skips a test if the condition is true. You can add a reason why it's skipped.
+test.fail(): Marks a test as expected to fail.
+test.fixme(): Used to mark tests that are known to be broken and need fixing.
+test.skip() with condition: This test will only run on Chromium, skipping other browsers.
+Normal Test: This is a regular test with no annotations.
+*/
+
 const { test } = require('@playwright/test')
 
 // Skipping this test
