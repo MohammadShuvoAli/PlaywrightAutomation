@@ -6,6 +6,11 @@ Exclude tests with the @regression tag: npx playwright test --grep-invert @regre
 
 const { test } = require('@playwright/test')
 
+/*
+@smoke: Marks the test group for smoke testing.
+@login, @signup, @regression: Tags applied to categorize the tests.
+*/
+
 // Test Group 1 with a tag
 test.describe('Login Tests @smoke', () => {
 
